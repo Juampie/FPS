@@ -80,7 +80,7 @@ public class Turret : MonoBehaviour
     {
         if (muzzleFlash != null)
         {
-            // Показываем эффект музы
+            // Показываем эффект выстрела
             muzzleFlash.gameObject.transform.position = firePoint.position;
             muzzleFlash.Play();
         }

@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
     private bool canShoot = true; // Можно ли стрелять
     private Recoil recoilController; // Ссылка на компонент управления отдачей
     private Animation reloadAnimation; // Анимация перезарядки
+    private AudioSource audio; // Звук выстрела
 
     public Text ammoText; // Текстовое поле для отображения текущего количества патронов
     public Text remainingAmmoText; // Текстовое поле для отображения оставшегося количества патронов
@@ -31,6 +32,7 @@ public class Weapon : MonoBehaviour
 
         recoilController = GetComponentInChildren<Recoil>(); // Получаем компонент управления отдачей
         reloadAnimation = GetComponent<Animation>(); // Получаем компонент анимации перезарядки
+        audio = GetComponent<AudioSource>();
 
         if (recoilController == null)
         {
@@ -87,7 +89,8 @@ public class Weapon : MonoBehaviour
         if (currentAmmo > 0)
         {
             currentAmmo--; // Уменьшаем количество патронов в магазине
-            muzzleFlash.Play(); // Воспроизводим эффект музы
+            muzzleFlash.Play(); // Воспроизводим эффект выстрела
+            audio.Play(); // Воспроизводим звук выстрела
 
             // Создаем пулю и задаем ей скорость
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
